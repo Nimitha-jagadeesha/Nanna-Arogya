@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Healthify</string>
+    <string name="don_t_you_have_an_account_sign_up">Don\'t you have an account?Sign Up</string>
+    <string name="save">Save</string>
+    <string name="enter_display_name">Enter Display Name</string>
+    <string name="tap_on_camera_to_choose_profile_picture">Tap on the camera to choose a profile picture</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="already_have_an_account_login">Already Have an account? Login</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="medicines">Medicines</string>
+</resources>
