@@ -4,14 +4,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-
 import static java.lang.Integer.parseInt;
 
 public class ProfileInfo extends AppCompatActivity {
@@ -33,26 +29,40 @@ public class ProfileInfo extends AppCompatActivity {
     public void onClickSubmit(View view)
     {
         float bodyMassIndex;
-        int height = parseInt(editTextHeight.getText().toString());
-        int weight=parseInt(editTextWeight.getText().toString());
-        bodyMassIndex=((float)height)/weight;
-        int resInt;
-        String result="";
-        if(bodyMassIndex<0.80)
-        {
-            resInt =-1;
+        try {
+            int height = parseInt(editTextHeight.getText().toString().trim());
+            int weight = parseInt(editTextWeight.getText().toString().trim());
+
+            bodyMassIndex = ((float) height) / weight;
+            int resInt;
+            if(bodyMassIndex<0.80)
+            {
+                resInt =-1;
+            }
+            else if(bodyMassIndex>=0.80&&bodyMassIndex<=1.8)
+            {
+                resInt =0;
+            }
+            else
+            {
+                resInt =1;
+            }
+            showDialogMessage(resInt);
         }
-        else if(bodyMassIndex>=0.80&&bodyMassIndex<=1.8)
+        catch (Exception e)
         {
-            resInt =0;
+            if(editTextHeight.getText().toString().trim().isEmpty())
+            {
+                editTextHeight.setError("Enter this Field");
+            }
+            if(editTextWeight.getText().toString().trim().isEmpty())
+            {
+                editTextWeight.setError("Enter this Field");
+            }
         }
-        else
-        {
-            resInt =1;
-        }
-        showDialog(result,resInt);
+
     }
-    private void showDialog(String message,int resInt)
+    private void showDialogMessage(int resInt)
     {
         AlertDialog.Builder dialogBuilder =new AlertDialog.Builder(this);
         LayoutInflater inflater =getLayoutInflater();

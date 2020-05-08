@@ -1,7 +1,9 @@
 package com.example.healthify;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
@@ -10,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -32,14 +35,14 @@ public class Home extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto","healthifySupport@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Support request");
+                startActivity(Intent.createChooser(emailIntent, "Send email..."));
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
@@ -57,6 +60,26 @@ public class Home extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.profile:
+                startActivity(new Intent(this,ProfileActivity.class));
+                break;
+            case R.id.share:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Hey check out the app at: https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+                break;
+            case R.id.about:
+                startActivity(new Intent(this,AboutUs.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
@@ -66,4 +89,22 @@ public class Home extends AppCompatActivity {
     {
         startActivity(new Intent(this,ProfileInfo.class));
     }
+    public void onClickMedicines(View view)
+    {
+        startActivity(new Intent(this,Medicines.class));
+
+    }
+
+    public void onClickReportUpload(View v)
+    {
+        startActivity(new Intent(this,ReportsUpload.class));
+
+    }
+
+    public void onClickHospital(View view)
+    {
+        startActivity(new Intent(this,HospitalUnit.class));
+
+    }
+
 }
