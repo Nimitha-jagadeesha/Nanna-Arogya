@@ -21,7 +21,7 @@
             android:textAlignment="center"
             android:layout_gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="Profile Information" />
+            android:text="Personal Details" />
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

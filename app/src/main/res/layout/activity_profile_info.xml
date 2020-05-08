@@ -6,5 +6,71 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ProfileInfo">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height (meters):"/>
+    <EditText
+        android:id="@+id/personalDetails_height"
+        android:layout_width="200dp"
+        android:inputType="number"
+        android:layout_height="wrap_content"
+        android:hint=""/>
 
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="weight (kg):"/>
+        <EditText
+            android:id="@+id/personalDetails_Weight"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint=""/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blood Group:"/>
+        <EditText
+            android:id="@+id/PersonalDetails_BloodGroup"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint=""/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blood Sugar level:"/>
+        <EditText
+            android:id="@+id/PersonalDetails_BloodSugarLevel"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint=""/>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Submit"/>
 </LinearLayout>
