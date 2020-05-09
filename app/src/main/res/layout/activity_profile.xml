@@ -26,7 +26,6 @@
             android:src="@drawable/icon_camera"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:onClick="onClickCamera"
             android:layout_margin="20dp"/>
         <ProgressBar
             android:visibility="gone"

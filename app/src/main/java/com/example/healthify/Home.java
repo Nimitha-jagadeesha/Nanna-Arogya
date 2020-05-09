@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.navigation.NavController;
@@ -77,6 +79,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.about:
                 startActivity(new Intent(this,AboutUs.class));
                 break;
+            case R.id.nav_logOut:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(this,MainActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -119,4 +125,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         return true;
     }
+
+
 }

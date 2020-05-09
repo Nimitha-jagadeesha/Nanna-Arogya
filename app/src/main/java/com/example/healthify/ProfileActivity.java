@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
@@ -20,11 +21,12 @@ public class ProfileActivity extends AppCompatActivity
     ProgressBar progressBar;
     EditText editTextLastName;
     EditText editTextPhoneNumber;
-    FirebaseAuth mAuth;
+    FirebaseUser user;
     FirebaseFirestore firebaseFirestore;
     String FirstName;
     String LastName;
     String phoneNumber;
+    String imageUrl=null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -37,10 +39,6 @@ public class ProfileActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        if (mAuth.getCurrentUser() == null) {
-            finish();
-            startActivity(new Intent(getApplicationContext(), com.example.healthify.MainActivity.class));
-        }
 
     }
 
@@ -50,7 +48,12 @@ public class ProfileActivity extends AppCompatActivity
         editTextLastName =findViewById(R.id.profile_EditText_LastName);
         editTextPhoneNumber=findViewById(R.id.profile_EditText_PhoneNumber);
         progressBar=findViewById(R.id.profile_ProgressBar);
-        mAuth=FirebaseAuth.getInstance();
+        user =FirebaseAuth.getInstance().getCurrentUser();
+//        if(user!=null)
+//        {
+//
+//        }
+
     }
 
 
@@ -75,18 +78,18 @@ public class ProfileActivity extends AppCompatActivity
            editTextPhoneNumber.setError("This field is required");
            return;
        }
-        DocumentReference documentReference =firebaseFirestore.collection("Users").document(mAuth.getCurrentUser().getUid());
-        Map<String,Object> user =new HashMap<>();
-        user.put("LastName",LastName);
-        user.put("FirstName",FirstName);
-        user.put("Phone",phoneNumber);
-        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(ProfileActivity.this,"Saved!",Toast.LENGTH_SHORT).show();
+       // DocumentReference documentReference =firebaseFirestore.collection("Users").document(mAuth.getCurrentUser().getUid());
+//        Map<String,Object> user =new HashMap<>();
+//        user.put("LastName",LastName);
+//        user.put("FirstName",FirstName);
+//        user.put("Phone",phoneNumber);
+//        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                Toast.makeText(ProfileActivity.this,"Saved!",Toast.LENGTH_SHORT).show();
             }
-        });
-    }
+//        });
+//    }
 
 
 }

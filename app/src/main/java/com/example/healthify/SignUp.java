@@ -19,6 +19,7 @@ public class SignUp extends AppCompatActivity {
 
     EditText emailEditText;
     EditText passwordEditText;
+    EditText conformPasswordEditText;
     ProgressBar progressBar;
     private FirebaseAuth mAuth;
     @Override
@@ -37,6 +38,7 @@ public class SignUp extends AppCompatActivity {
         progressBar=findViewById(R.id.progressbarSignUp);
         emailEditText=findViewById(R.id.editTextEmailId);
         passwordEditText=findViewById(R.id.SignUpEditTextPassword);
+        conformPasswordEditText=findViewById(R.id.SignUpEditTextConformPassword);
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -54,6 +56,7 @@ public class SignUp extends AppCompatActivity {
     {
         String mail =emailEditText.getText().toString().trim();
         String password=passwordEditText.getText().toString();
+        String conformPassword =conformPasswordEditText.getText().toString();
         if(mail.isEmpty())
         {
             emailEditText.setError("Email is required");
@@ -78,6 +81,12 @@ public class SignUp extends AppCompatActivity {
             passwordEditText.requestFocus();
             return;
         }
+        if(!password.equals(conformPassword))
+        {
+            conformPasswordEditText.setError("Password and conform password must be same");
+            conformPasswordEditText.requestFocus();
+            return;
+        }
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(mail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -85,10 +94,9 @@ public class SignUp extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     Toast.makeText(SignUp.this, "User Register Sucessfull", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(SignUp.this,Home.class);
-                    intent.addCategory(Intent.CATEGORY_HOME);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+                    intent.addCategory(Intent.CATEGORY_HOME);
                     finish();
                 }
                 else
@@ -98,7 +106,7 @@ public class SignUp extends AppCompatActivity {
 
                     else
                         Toast.makeText(SignUp.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
