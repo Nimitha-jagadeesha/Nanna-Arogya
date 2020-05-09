@@ -22,4 +22,19 @@
 
     <string name="home_second">Home Second</string>
     <string name="medicines">Medicines</string>
+    <string name="tips">Tips</string>
+    <string name="you_are_overweight">YOU ARE OVERWEIGHT !!</string>
+    <string name="over_weight">* Reduce sugar \n * No white carbs \n * Manage stress \n * Eat lean protein\n * Manage stress \n * drink 2-3 litres of water everyday \n * drink fresh lemon extract in warm water\n * Get proper sleep of Atleast 6 to 8 hours\n * Workout regularly, include cardio workouts more\n</string>
+    <string name="you_are_underweight">YOU ARE UNDERWEIGHT!!</string>
+    <string name="under_weight">*Eat and drink nutrient rich foods, smoothies and juices regularly \n *Do yoga regularly \n *Have proper mental diet\n</string>
+    <string name="congratulations_you_have_normal_body_weight">Congratulations you have normal body weight.</string>
+    <string name="do_physical_and_mental_exercises_regularly_and_stay_healthy_n">Do physical and mental exercises regularly and stay healthy\n</string>
+    <string name="reports_upload">Reports Upload</string>
+    <string name="height_meters">Height (meters):</string>
+    <string name="weight_kg">weight (kg):</string>
+    <string name="blood_group">Blood Group:</string>
+    <string name="blood_sugar_level">Blood Sugar level:</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_number">Phone Number</string>
 </resources>

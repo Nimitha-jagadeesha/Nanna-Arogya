@@ -4,73 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:layout_marginTop="20dp"
     android:orientation="vertical"
     tools:context=".ProfileInfo">
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
     android:orientation="horizontal">
+
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Height (meters):"/>
+        android:textSize="20sp"
+        android:text="@string/height_meters"/>
+
     <EditText
         android:id="@+id/personalDetails_height"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:inputType="number"
+        android:textSize="20sp"
         android:layout_height="wrap_content"
-        android:hint=""/>
+        />
 
 </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:text="weight (kg):"/>
+            android:textSize="20sp"
+            android:text="@string/weight_kg"/>
         <EditText
             android:id="@+id/personalDetails_Weight"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint=""/>
+            android:inputType="number"
+            android:textSize="20sp"
+            />
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Blood Group:"/>
+            android:textSize="20sp"
+            android:text="@string/blood_group"/>
+
         <EditText
             android:id="@+id/PersonalDetails_BloodGroup"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
+            android:textSize="20sp"
             android:layout_height="wrap_content"
-            android:hint=""/>
+            />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Blood Sugar level:"/>
+            android:textSize="20sp"
+            android:text="@string/blood_sugar_level"/>
+
         <EditText
             android:id="@+id/PersonalDetails_BloodSugarLevel"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint=""/>
+            android:textSize="20sp"
+            />
 
     </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Submit"/>
+        android:onClick="onClickSubmit"
+        android:layout_marginTop="20dp"
+        android:text="Update"/>
 </LinearLayout>

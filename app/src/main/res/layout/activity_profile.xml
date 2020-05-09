@@ -21,14 +21,13 @@
 
         <ImageView
             android:id="@+id/profile_imageView_picture"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/icon_camera"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:onClick="onClickCamera"
             android:layout_margin="20dp"/>
-
         <ProgressBar
             android:visibility="gone"
             android:id="@+id/profile_ProgressBar"
@@ -42,11 +41,27 @@
 
     <EditText
         android:id="@+id/profile_EditText_profileName"
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:layout_margin="20dp"
-        android:hint="@string/enter_display_name"/>
+        android:hint="@string/first_name"/>
+    <EditText
+        android:id="@+id/profile_EditText_LastName"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:hint="@string/last_name"/>
+
+    <EditText
+        android:id="@+id/profile_EditText_PhoneNumber"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/phone_number"/>
 
     <Button
         android:layout_width="wrap_content"
