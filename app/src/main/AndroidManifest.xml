@@ -8,23 +8,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ReportsUpload"></activity>
+        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".ReportsUpload" />
         <activity android:name=".Medicines" />
         <activity android:name=".HospitalUnit" />
         <activity android:name=".AboutUs" />
-        <activity android:name=".ProfileInfo"
-            android:label="Body Mass Index"/>
+        <activity
+            android:name=".ProfileInfo"
+            android:label="Personal Details " />
         <activity
             android:name=".Home"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SignUp"
-            android:label="Sign Up"/>
-        <activity android:name=".ProfileActivity"
-            android:label="Profile"/>
+        <activity
+            android:name=".SignUp"
+            android:label="Sign Up" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Profile" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +34,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".AlarmReceiver"/>
+
+        <receiver android:name=".AlarmReceiver" />
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

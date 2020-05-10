@@ -52,4 +52,8 @@
     <string name="female">Female</string>
     <string name="bmr_">BMR:</string>
     <string name="dialy_calories">Dialy Calories:</string>
+    <string name="enter_medicine_name">Enter Medicine Name</string>
+    <string name="set">SET</string>
+    <string name="cancel">CANCEL</string>
+    <string name="dont_forget">Dont forget!!!</string>
 </resources>

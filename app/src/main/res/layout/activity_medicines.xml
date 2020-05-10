@@ -13,7 +13,7 @@
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Hospital Name"
+        android:hint="@string/enter_medicine_name"
         android:layout_marginBottom="20dp"/>
     <TimePicker
         android:id="@+id/timePicker"
@@ -29,13 +29,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="SET"
+            android:onClick="onClickSet"
+            android:text="@string/set"
             android:layout_marginRight="20dp"/>
         <Button
             android:id="@+id/cancelBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CANCEL"/>
+            android:onClick="onClickCancel"
+            android:text="@string/cancel"/>
+
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/medicine_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -78,7 +78,7 @@ public class ProfileActivity extends AppCompatActivity
            editTextPhoneNumber.setError("This field is required");
            return;
        }
-       // DocumentReference documentReference =firebaseFirestore.collection("Users").document(mAuth.getCurrentUser().getUid());
+//        DocumentReference documentReference =firebaseFirestore.collection("Users").document(mAuth.getCurrentUser().getUid());
 //        Map<String,Object> user =new HashMap<>();
 //        user.put("LastName",LastName);
 //        user.put("FirstName",FirstName);
@@ -87,9 +87,9 @@ public class ProfileActivity extends AppCompatActivity
 //            @Override
 //            public void onSuccess(Void aVoid) {
 //                Toast.makeText(ProfileActivity.this,"Saved!",Toast.LENGTH_SHORT).show();
-            }
+//            }
 //        });
-//    }
+    }
 
 
 }
