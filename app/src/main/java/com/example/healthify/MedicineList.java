@@ -28,10 +28,10 @@ public class MedicineList extends ArrayAdapter<MedicineNotification> {
         LayoutInflater inflater =contest.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.notification_list_view,null,true);
         TextView textViewName=listViewItem.findViewById(R.id.medicine_name);
-        TextView textViewRating=listViewItem.findViewById(R.id.time_of_dosage);
+        TextView textViewTime=listViewItem.findViewById(R.id.time_of_dosage);
         MedicineNotification medicine=medicineList.get(position);
-        textViewRating.setText(String.valueOf(medicine.getMedicineName()));
-        textViewName.setText(medicine.getHour()+":"+medicine.minute);
+        textViewName.setText(String.valueOf(medicine.getMedicineName()));
+        textViewTime.setText(medicine.getHour()+":"+medicine.getMinute());
 
         return listViewItem;
     }

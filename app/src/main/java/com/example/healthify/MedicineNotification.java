@@ -1,6 +1,7 @@
 package com.example.healthify;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 
 class MedicineNotification
 {
@@ -9,7 +10,6 @@ class MedicineNotification
     String medicineName;
     int hour;
     int minute;
-
     public MedicineNotification()
     {
 
