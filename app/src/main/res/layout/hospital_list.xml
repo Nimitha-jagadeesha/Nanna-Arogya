@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/hospital_textView_hospitalName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:text="Hospital Name"/>
+    <TextView
+        android:id="@+id/hospital_textView_Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="Date"/>
+    <TextView
+        android:id="@+id/hospital_textView_Time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time"/>
+
+</LinearLayout>
