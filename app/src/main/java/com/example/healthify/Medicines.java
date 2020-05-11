@@ -95,8 +95,7 @@ public class Medicines extends AppCompatActivity  {
     {
         medicineList=new ArrayList<>();
         user=FirebaseAuth.getInstance().getCurrentUser();
-        id=user.getUid();
-        databaseReminders= FirebaseDatabase.getInstance().getReference("reminders").child(id);
+        databaseReminders= FirebaseDatabase.getInstance().getReference("reminders").child(user.getUid());
         listViewMedicine=findViewById(R.id.medicine_listView);
         editTextMedicine= findViewById(R.id.editText);
         timePicker = findViewById(R.id.timePicker);

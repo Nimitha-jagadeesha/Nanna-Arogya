@@ -1,35 +1,35 @@
 package com.example.healthify;
 public class HospitalData
 {
-    String Date;
-    String HospitalId;
-    String HospitalName;
-    String Time;
+    String date;
+    String hospitalId;
+    String hospitalName;
+    String time;
 
 
     public HospitalData() {
     }
 
     public HospitalData(String date, String hospitalId, String hospitalName, String time) {
-        Date = date;
-        HospitalId = hospitalId;
-        HospitalName = hospitalName;
-        Time = time;
+        this.date = date;
+        this.hospitalId = hospitalId;
+        this.hospitalName = hospitalName;
+        this.time = time;
     }
 
     public String getHospitalId() {
-        return HospitalId;
+        return hospitalId;
     }
 
     public String getHospitalName() {
-        return HospitalName;
+        return hospitalName;
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public String getTime() {
-        return Time;
+        return time;
     }
 }

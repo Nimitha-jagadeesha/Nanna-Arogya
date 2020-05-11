@@ -159,6 +159,12 @@ public class HospitalUnit extends AppCompatActivity implements DatePickerDialog.
 
     public void onClickSetHospital(View view)
     {
+        if(hospitalEditText.getText().toString().isEmpty())
+        {
+            hospitalEditText.setError("Enter this Field");
+            hospitalEditText.requestFocus();
+            return;
+        }
         AlarmReceiver.Notificationmsg=hospitalEditText.getText().toString();
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         calendar.set(Calendar.SECOND,0);
@@ -166,7 +172,7 @@ public class HospitalUnit extends AppCompatActivity implements DatePickerDialog.
         broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), broadcast);
         saveNotification(hospitalEditText.getText().toString(),calendar);
-        //Toast.makeText(this,"Set",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Set",Toast.LENGTH_SHORT).show();
     }
 
     private void saveNotification(String hospitalName,Calendar calendar)
@@ -186,11 +192,14 @@ public class HospitalUnit extends AppCompatActivity implements DatePickerDialog.
         databaseHospital.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                hospitalList.clear();
                 for(DataSnapshot hospitalSnapShot: dataSnapshot.getChildren())
                 {
-                    HospitalData hospitalData= hospitalSnapShot.getValue(HospitalData.class);
-                    hospitalList.add(hospitalData);
+                    HospitalData hospitalData1= hospitalSnapShot.getValue(HospitalData.class);
+                    hospitalList.add(hospitalData1);
                 }
+                HospitalList hospitalList1= new HospitalList(HospitalUnit.this,hospitalList);
+                listViewHospital.setAdapter(hospitalList1);
             }
 
             @Override
