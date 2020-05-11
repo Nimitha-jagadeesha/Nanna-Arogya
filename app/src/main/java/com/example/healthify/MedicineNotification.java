@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 class MedicineNotification
 {
     String notificationId;
-    AlarmManager alarmManager;
     String medicineName;
     int hour;
     int minute;
@@ -15,9 +14,8 @@ class MedicineNotification
 
     }
 
-    public MedicineNotification(String notificationId, AlarmManager alarmManager, String medicineName, int hour, int minute) {
+    public MedicineNotification(String notificationId,  String medicineName, int hour, int minute) {
         this.notificationId = notificationId;
-        this.alarmManager = alarmManager;
         this.medicineName = medicineName;
         this.hour = hour;
         this.minute = minute;
@@ -25,10 +23,6 @@ class MedicineNotification
 
     public String getNotificationId() {
         return notificationId;
-    }
-
-    public AlarmManager getAlarmManager() {
-        return alarmManager;
     }
 
     public String getMedicineName() {

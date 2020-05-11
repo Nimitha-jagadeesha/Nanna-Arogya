@@ -3,6 +3,8 @@ package com.example.healthify;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.RequiresApi;
@@ -30,10 +32,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Medicines extends AppCompatActivity  {
+public class Medicines extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
     EditText editTextMedicine;
-    TimePicker timePicker;
+    EditText editTextTime;
     AlarmManager alarmManager=null;
     PendingIntent broadcast;
     DatabaseReference databaseReminders;
@@ -41,6 +43,7 @@ public class Medicines extends AppCompatActivity  {
     ArrayList<MedicineNotification> medicineList;
     ListView  listViewMedicine;
     String id;
+    Calendar startTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +53,13 @@ public class Medicines extends AppCompatActivity  {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 MedicineNotification medicine=medicineList.get(position);
-                showDeleteDialog(medicine.getNotificationId(),medicine.getAlarmManager(),medicine.getMedicineName());
+                showDeleteDialog(medicine.getNotificationId(),medicine.getMedicineName());
                 return true;
             }
         });
     }
 
-    private void showDeleteDialog(final String notificationId, final AlarmManager alarmManager, String name)
+    private void showDeleteDialog(final String notificationId,  String name)
     {
         AlertDialog.Builder dialogBuilder =new AlertDialog.Builder(this);
         LayoutInflater inflater =getLayoutInflater();
@@ -70,7 +73,6 @@ public class Medicines extends AppCompatActivity  {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                alarmManager.cancel(pendingIntent);
                 deleteMedicine(notificationId);
                 dialog.dismiss();
             }
@@ -98,14 +100,14 @@ public class Medicines extends AppCompatActivity  {
         databaseReminders= FirebaseDatabase.getInstance().getReference("reminders").child(user.getUid());
         listViewMedicine=findViewById(R.id.medicine_listView);
         editTextMedicine= findViewById(R.id.editText);
-        timePicker = findViewById(R.id.timePicker);
+        startTime = Calendar.getInstance();
+        editTextTime=findViewById(R.id.editText_time_medicine);
+        editTextTime.setText(startTime.get(Calendar.HOUR)+":"+startTime.get(Calendar.MINUTE));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public  void onClickSet(View view)
     {
         editTextMedicine= findViewById(R.id.editText);
-         timePicker = findViewById(R.id.timePicker);
          if(editTextMedicine.getText().toString().isEmpty())
          {
              editTextMedicine.setError("Name cannot be empty");
@@ -117,23 +119,17 @@ public class Medicines extends AppCompatActivity  {
 
         Intent notificationIntent = new Intent(this, AlarmReceiver.class);
         broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        int hour = timePicker.getHour();
-        int minute = timePicker.getMinute();
 
-        Calendar startTime = Calendar.getInstance();
-        startTime.set(Calendar.HOUR_OF_DAY,hour);
-        startTime.set(Calendar.MINUTE,minute);
-        startTime.set(Calendar.SECOND,0);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, startTime.getTimeInMillis(), broadcast);
-        saveNotification(editTextMedicine.getText().toString(),alarmManager,hour,minute);
+       saveNotification(editTextMedicine.getText().toString(),startTime.get(Calendar.HOUR),startTime.get(Calendar.MINUTE));
         Toast.makeText(this,"Set",Toast.LENGTH_SHORT).show();
     }
 
-    private void saveNotification(String medicine,AlarmManager alarmManager,int hour,int minute)
+    private void saveNotification(String medicine,int hour,int minute)
     {
 
             String id=databaseReminders.push().getKey();
-            MedicineNotification medicineNotification=new MedicineNotification(id,alarmManager,medicine,hour,minute);
+            MedicineNotification medicineNotification=new MedicineNotification(id,medicine,hour,minute);
             databaseReminders.child(id).setValue(medicineNotification);
             Toast.makeText(this,"Track name added successfully!",Toast.LENGTH_SHORT).show();
     }
@@ -161,5 +157,16 @@ public class Medicines extends AppCompatActivity  {
         });
 
     }
-
+    public void onClickTimePickerMedicine(View view)
+    {
+        TimePickerDialog timePickerDialog =new TimePickerDialog(this,this,Calendar.getInstance().get(Calendar.HOUR_OF_DAY),Calendar.getInstance().get(Calendar.MINUTE),false);
+        timePickerDialog.show();
+    }
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        startTime.set(Calendar.HOUR_OF_DAY,hourOfDay);
+        startTime.set(Calendar.MINUTE,minute);
+        startTime.set(Calendar.SECOND,0);
+        editTextTime.setText(hourOfDay+":"+minute);
+    }
 }
