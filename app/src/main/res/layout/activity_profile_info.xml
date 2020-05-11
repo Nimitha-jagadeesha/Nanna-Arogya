@@ -24,7 +24,7 @@
     <EditText
         android:id="@+id/personalDetails_height"
         android:layout_width="150dp"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textSize="20sp"
         android:layout_height="wrap_content" />
 
@@ -45,7 +45,7 @@
             android:id="@+id/personalDetails_Weight"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textSize="20sp"
             />
 
@@ -142,6 +142,7 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_margin="20dp"
+            android:onClick="onClickBodyWater"
             android:layout_weight="1">
 
             <TextView
@@ -155,6 +156,7 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_margin="20dp"
+            android:onClick="onClickBloodVolume"
             android:layout_weight="1">
             <TextView
                 android:layout_width="match_parent"

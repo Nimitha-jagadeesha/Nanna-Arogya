@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 public class ProfileInfo extends AppCompatActivity {
@@ -38,16 +39,16 @@ public class ProfileInfo extends AppCompatActivity {
     {
         float bodyMassIndex;
         try {
-            int height = parseInt(editTextHeight.getText().toString().trim());
-            int weight = parseInt(editTextWeight.getText().toString().trim());
+            float height = parseFloat(editTextHeight.getText().toString().trim());
+            float weight = parseFloat(editTextWeight.getText().toString().trim());
 
-            bodyMassIndex = ((float) weight) / height;
+            bodyMassIndex = ((float) weight) / (height*height);
             int resInt;
-            if(bodyMassIndex<0.80)
+            if(bodyMassIndex<18.5)
             {
                 resInt =-1;
             }
-            else if(bodyMassIndex>=0.80&&bodyMassIndex<=1.8)
+            else if(bodyMassIndex>=18.5&&bodyMassIndex<=24.9)
             {
                 resInt =0;
             }
@@ -108,8 +109,8 @@ public class ProfileInfo extends AppCompatActivity {
             if(maleRadioButton.isChecked())
             {
                 try {
-                    int height = parseInt(editTextHeight.getText().toString().trim());
-                    int weight = parseInt(editTextWeight.getText().toString().trim());
+                    float height = parseFloat(editTextHeight.getText().toString().trim());
+                   float weight = parseFloat(editTextWeight.getText().toString().trim());
                     int age = parseInt(editTextAge.getText().toString().trim());
                     double BMR = 66.47+(13.75*weight)+(12.7*height*39.37)-(6.755*age);
                     bmr.setText(Math.round(BMR)+"");
@@ -132,13 +133,15 @@ public class ProfileInfo extends AppCompatActivity {
                         editTextAge.setError("Enter this Field");
                         editTextAge.requestFocus();
                     }
+                    return;
+
                 }
             }
             else
             {
                 try {
-                    int height = parseInt(editTextHeight.getText().toString().trim());
-                    int weight = parseInt(editTextWeight.getText().toString().trim());
+                    float height = parseFloat(editTextHeight.getText().toString().trim());
+                    float weight = parseFloat(editTextWeight.getText().toString().trim());
                     int age = parseInt(editTextAge.getText().toString().trim());
                     double BMR = 655.1+(weight*9.563)+(4.7*height*39.37)-(4.667*age);
                     bmr.setText(Math.round(BMR)+"");
@@ -161,6 +164,7 @@ public class ProfileInfo extends AppCompatActivity {
                         editTextAge.setError("Enter this Field");
                         editTextAge.requestFocus();
                     }
+                    return;
                 }
             }
 
@@ -175,5 +179,66 @@ public class ProfileInfo extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    public void onClickBloodVolume(View view)
+    {
+        try {
+            int age = parseInt(editTextAge.getText().toString().trim());
+            float weight = parseFloat(editTextWeight.getText().toString().trim());
+            float bloodVolume;
+            if(age<65)
+            {
+                bloodVolume=weight*70;
+            }
+            else
+            {
+                bloodVolume=weight*60;
+            }
+            AlertDialog.Builder dialogBuilder =new AlertDialog.Builder(this);
+            dialogBuilder.setTitle("");
+            dialogBuilder.setMessage("Your Blood Volume is "+bloodVolume+" ml/kg");
+            final AlertDialog dialog=dialogBuilder.create();
+            dialog.show();
+        }
+        catch (Exception e)
+        {
+            if(editTextAge.getText().toString().trim().isEmpty())
+            {
+                editTextAge.setError("Enter this Field");
+                editTextAge.requestFocus();
+            }
+            if(editTextWeight.getText().toString().trim().isEmpty())
+            {
+                editTextWeight.setError("Enter this Field");
+                editTextWeight.requestFocus();
+
+            }
+        }
+
+    }
+
+    public void onClickBodyWater(View view)
+    {
+        try {
+            float weight = parseFloat(editTextWeight.getText().toString().trim());
+            double bodyWater;
+            bodyWater=weight*0.0434;
+            AlertDialog.Builder dialogBuilder =new AlertDialog.Builder(this);
+            dialogBuilder.setTitle("");
+            dialogBuilder.setMessage("You have to drink  "+bodyWater+" liters/day");
+            final AlertDialog dialog=dialogBuilder.create();
+            dialog.show();
+        }
+        catch (Exception e)
+        {
+            if(editTextWeight.getText().toString().trim().isEmpty())
+            {
+                editTextWeight.setError("Enter this Field");
+                editTextWeight.requestFocus();
+
+            }
+        }
+
     }
 }
