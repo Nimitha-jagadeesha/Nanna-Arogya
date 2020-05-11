@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -74,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity
        id=user.getUid();
        Profile newProfile=new Profile(id,FirstName,LastName,phoneNumber);
        databaseReference.child(id).setValue(newProfile);
-
+        Toast.makeText(this,"Profile Updated",Toast.LENGTH_SHORT).show();
     }
     @Override
     protected void onStart() {
