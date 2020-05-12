@@ -47,7 +47,8 @@ public class ProfileInfo extends AppCompatActivity {
         maleRadioButton=findViewById(R.id.radio_male);
         femaleRadioButton =findViewById(R.id.radio_female);
         user= FirebaseAuth.getInstance().getCurrentUser();
-        databasePersonalDetails= FirebaseDatabase.getInstance().getReference("personalInfo");
+        String id =user.getUid();
+        databasePersonalDetails= FirebaseDatabase.getInstance().getReference("personalInfo").child(id);
     }
     public void onClickSubmit(View view)
     {
