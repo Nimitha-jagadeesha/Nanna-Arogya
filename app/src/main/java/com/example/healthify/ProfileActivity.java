@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity
         progressBar=findViewById(R.id.profile_ProgressBar);
         user=FirebaseAuth.getInstance().getCurrentUser();
         id=user.getUid();
-        databaseReference= FirebaseDatabase.getInstance().getReference("profiles");
+        databaseReference= FirebaseDatabase.getInstance().getReference("profiles").child(id);
     }
 
 
