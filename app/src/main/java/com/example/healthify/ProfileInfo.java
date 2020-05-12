@@ -226,7 +226,7 @@ public class ProfileInfo extends AppCompatActivity {
             bodyWater=weight*0.0434;
             AlertDialog.Builder dialogBuilder =new AlertDialog.Builder(this);
             dialogBuilder.setTitle("");
-            dialogBuilder.setMessage("You have to drink  "+bodyWater+" liters/day");
+            dialogBuilder.setMessage("You have to drink  "+bodyWater+" liters");
             final AlertDialog dialog=dialogBuilder.create();
             dialog.show();
         }
