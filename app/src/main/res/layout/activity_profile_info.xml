@@ -99,6 +99,12 @@
             />
     </RadioGroup>
 
+    <Button
+        android:layout_width="104dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onClickUpdatePersonalInfo"
+        android:text="@string/update" />
 
     <LinearLayout
         android:layout_width="match_parent"
