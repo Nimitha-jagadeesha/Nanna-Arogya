@@ -2,6 +2,7 @@ package com.example.healthify;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -10,6 +11,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -60,6 +62,12 @@ public class ReportsUpload extends AppCompatActivity {
         buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(editTextPdfName.getText().toString().isEmpty())
+                {
+                    editTextPdfName.setError("enter the pdf name");
+                    editTextPdfName.requestFocus();
+                    return;
+                }
                 selectPDF();
             }
         });
@@ -69,9 +77,53 @@ public class ReportsUpload extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 uploadPDF uploadPdf = uploadPDFList.get(position);
                 Intent intent  =new Intent();
-                intent.setType(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(uploadPdf.getUrl()));
-                startActivity(intent);
+                intent.setDataAndType(Uri.parse(uploadPdf.getUrl()), "application/pdf");
+                startActivity(Intent.createChooser(intent, "Choose an Application:"));
+            }
+        });
+       pdfListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+           @Override
+           public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+               deletePdf(position);
+               return true;
+           }
+       });
+    }
+
+    private void deletePdf(int position)
+    {
+        final  uploadPDF uploadPdf = uploadPDFList.get(position);
+        AlertDialog.Builder dialogBuilder =new AlertDialog.Builder(this);
+        LayoutInflater inflater =getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.delete_dialog,null);
+        dialogBuilder.setView(dialogView);
+        final Button delete=dialogView.findViewById(R.id.delete_medicine_notification);
+        dialogBuilder.setTitle("Deleting "+uploadPdf.getPdfName());
+        final Button cancel=dialogView.findViewById(R.id.cancel_medicine_notification_dialog);
+        final AlertDialog dialog=dialogBuilder.create();
+        dialog.show();
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference databaseReferenceMedicine =FirebaseDatabase.getInstance().getReference("reports").child(user.getUid()).child(uploadPdf.getId());
+                databaseReferenceMedicine.removeValue();
+                StorageReference deleteFile = storageReference.child((uploadPdf.getUrl()));
+                deleteFile.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        Toast.makeText(ReportsUpload.this, "Pdf deleted", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                dialog.dismiss();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }
