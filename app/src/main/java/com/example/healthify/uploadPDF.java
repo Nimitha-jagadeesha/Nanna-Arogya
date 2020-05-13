@@ -2,20 +2,25 @@ package com.example.healthify;
 
 public class uploadPDF
 {
-    public String PdfName;
+    public  String id;
+    public String pdfName;
     public String url;
 
     public uploadPDF() {
     }
 
-    public uploadPDF(String pdfName, String url)
-    {
-        PdfName = pdfName;
+    public uploadPDF(String id, String pdfName, String url) {
+        this.id = id;
+        this.pdfName = pdfName;
         this.url = url;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String getPdfName() {
-        return PdfName;
+        return pdfName;
     }
 
     public String getUrl() {
