@@ -1,81 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context=".HospitalUnit">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
         <ImageView
+            android:id="@+id/hospital_imageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:src="@drawable/hospital" />
+            android:src="@drawable/hospital"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/hospital_name_editText"
-            android:layout_width="match_parent"
+            android:layout_width="351dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:hint="Hospital name" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickDatePicker"
-        android:orientation="horizontal">
+            android:hint="Hospital name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/hospital_imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/date_picker_imageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:src="@drawable/date_picker" />
+            android:src="@drawable/date_picker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hospital_imageView" />
+
         <EditText
             android:id="@+id/editText_date"
-            android:layout_width="match_parent"
+            android:layout_width="351dp"
             android:layout_height="50dp"
-            android:onClick="onClickDatePicker"
-            android:inputType="none"
-            android:enabled="false"
-            android:clickable="true"
             android:layout_margin="10dp"
-            android:hint="Set Date" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickTimePicker"
-        android:orientation="horizontal">
+            android:clickable="true"
+            android:enabled="false"
+            android:hint="Set Date"
+            android:inputType="none"
+            android:onClick="onClickDatePicker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/date_picker_imageView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/hospital_name_editText" />
+
         <ImageView
             android:id="@+id/time_picker_imageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:src="@drawable/time_picker" />
-        <EditText
-            android:id="@+id/time_EditText"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:inputType="none"
-            android:enabled="false"
-            android:clickable="true"
-            android:onClick="onClickTimePicker"
-            android:hint="Set time" />
-    </LinearLayout>
+            android:src="@drawable/time_picker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_picker_imageView" />
+
+    <EditText
+        android:id="@+id/time_EditText"
+        android:layout_width="351dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:enabled="false"
+        android:hint="Set time"
+        android:inputType="none"
+        android:onClick="onClickTimePicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/time_picker_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/editText_date" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:onClick="onClickSetHospital"
-        android:text="Set" />
+            android:id="@+id/set_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="52dp"
+            android:onClick="onClickSetHospital"
+            android:text="Set"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_EditText" />
+
     <ListView
         android:id="@+id/list_view_hospital"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
-</LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/set_button"
+        app:layout_constraintVertical_bias="0.125" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

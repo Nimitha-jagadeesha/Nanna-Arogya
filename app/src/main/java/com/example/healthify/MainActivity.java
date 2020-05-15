@@ -20,18 +20,18 @@ public class MainActivity extends AppCompatActivity {
 
     EditText emailEditText;
     EditText passwordEditText;
-    FirebaseAuth mAuth;
+    FirebaseAuth mAuth=FirebaseAuth.getInstance();
     ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        bindViews();
         if (mAuth.getCurrentUser() != null) {
             finish();
             startActivity(new Intent(getApplicationContext(), Home.class));
         }
+        setContentView(R.layout.activity_main);
+        bindViews();
+
     }
 
     private void bindViews()
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.editTextEmail);
         passwordEditText=findViewById(R.id.editTextPassword);
         progressBar=findViewById(R.id.progressbar);
-        mAuth=FirebaseAuth.getInstance();
+
     }
 
     public void onClickSignUp(View v)
