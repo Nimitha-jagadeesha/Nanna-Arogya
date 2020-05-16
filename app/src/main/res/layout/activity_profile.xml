@@ -18,7 +18,8 @@
             android:src="@drawable/profile"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"/>
+            android:layout_margin="20dp"
+           android:onClick="onClickProfilePicImageView"/>
         <ProgressBar
             android:visibility="gone"
             android:id="@+id/profile_ProgressBar"
