@@ -12,7 +12,7 @@
         android:orderInCategory="100"
         android:icon="@drawable/profile"
         android:title="Profile"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/about"
         android:orderInCategory="100"

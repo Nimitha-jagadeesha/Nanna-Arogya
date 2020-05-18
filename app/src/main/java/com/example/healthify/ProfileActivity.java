@@ -62,7 +62,6 @@ public class ProfileActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         bindViews();
-
         final Switch sw =  findViewById(R.id.switch_home);
         sw.setChecked(checked);
         if(sw!=null)
