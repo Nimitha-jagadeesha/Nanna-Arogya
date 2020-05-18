@@ -6,6 +6,7 @@
     android:layout_margin="10dp"
     android:layout_marginTop="20dp"
     android:orientation="vertical"
+    android:background="@color/backgroundColor"
     tools:context=".ProfileInfo">
 
 <LinearLayout
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/textColor"
         android:text="@string/height_meters"/>
 
     <EditText
@@ -26,6 +28,7 @@
         android:layout_width="150dp"
         android:inputType="numberDecimal"
         android:textSize="20sp"
+        android:textColor="@color/textColor"
         android:layout_height="wrap_content" />
 
 </LinearLayout>
@@ -39,6 +42,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textColor="@color/textColor"
             android:textSize="20sp"
             android:text="@string/weight_kg"/>
         <EditText
@@ -47,6 +51,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:textSize="20sp"
+            android:textColor="@color/textColor"
             />
 
     </LinearLayout>
@@ -61,6 +66,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="20sp"
+            android:textColor="@color/textColor"
             android:text="@string/age"/>
 
         <EditText
@@ -68,7 +74,9 @@
             android:layout_width="150dp"
             android:textSize="20sp"
             android:inputType="number"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            />
 
 
     </LinearLayout>
@@ -82,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:textStyle="bold"
+            android:textColor="@color/textColor"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Gender:"/>
         <RadioButton android:id="@+id/radio_male"
@@ -89,12 +98,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:checked="true"
+            android:textColor="@color/textColor"
             android:text="Male"
            />
         <RadioButton android:id="@+id/radio_female"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
+            android:textColor="@color/textColor"
             android:text="Female"
             />
     </RadioGroup>
@@ -104,6 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:onClick="onClickUpdatePersonalInfo"
+        android:background="@color/buttonColor"
         android:text="@string/update" />
 
     <LinearLayout
@@ -115,6 +127,7 @@
             android:layout_height="100dp"
             android:layout_margin="20dp"
             android:onClick="onClickSubmit"
+            android:background="@color/cardBackgroundColor"
             android:layout_weight="1">
 
             <TextView
@@ -129,11 +142,13 @@
             android:layout_height="100dp"
             android:layout_margin="20dp"
             android:onClick="onClickDailyCalories"
+            android:background="@color/cardBackgroundColor"
             android:layout_weight="1">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/textColor"
                 android:text="@string/daily_calories"
                 android:textAlignment="center"/>
         </androidx.cardview.widget.CardView>
@@ -149,12 +164,14 @@
             android:layout_height="100dp"
             android:layout_margin="20dp"
             android:onClick="onClickBodyWater"
+            android:background="@color/cardBackgroundColor"
             android:layout_weight="1">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/textColor"
                 android:text="@string/body_water"
                 android:textAlignment="center" />
         </androidx.cardview.widget.CardView>
@@ -163,12 +180,14 @@
             android:layout_height="100dp"
             android:layout_margin="20dp"
             android:onClick="onClickBloodVolume"
+            android:background="@color/cardBackgroundColor"
             android:layout_weight="1">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/blood_volume"
+                android:textColor="@color/textColor"
                 android:textAlignment="center"/>
         </androidx.cardview.widget.CardView>
 

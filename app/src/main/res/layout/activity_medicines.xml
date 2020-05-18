@@ -7,6 +7,7 @@
     tools:context=".Medicines"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:background="@color/backgroundColor"
     android:padding="10dp">
 
     <EditText
@@ -14,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_medicine_name"
+        android:textColor="@color/textColor"
         android:layout_marginBottom="20dp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,6 +33,7 @@
             android:layout_height="50dp"
             android:inputType="none"
             android:enabled="false"
+            android:textColor="@color/textColor"
             android:clickable="true"
             android:layout_margin="10dp"
             android:hint="Set Time" />
@@ -45,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:backgroundTint="@color/buttonColor"
             android:onClick="onClickSet"
             android:text="@string/set"
             android:layout_marginRight="20dp"/>

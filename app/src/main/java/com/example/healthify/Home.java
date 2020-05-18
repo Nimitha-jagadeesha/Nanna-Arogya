@@ -1,15 +1,20 @@
 package com.example.healthify;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 public class Home extends AppCompatActivity {
@@ -21,6 +26,7 @@ public class Home extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+        loadSettings();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,6 +36,19 @@ public class Home extends AppCompatActivity {
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
             }
         });
+    }
+    private void loadSettings()
+    {
+        SharedPreferences sharedPreferences=getSharedPreferences("Data_heathery",MODE_PRIVATE);
+        ProfileActivity.checked=sharedPreferences.getBoolean("Setting",false);
+        if(ProfileActivity.checked)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     @Override

@@ -2,5 +2,10 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#3700B3</color>
+    <color name="backgroundColor">#fcfcfc</color>
+    <color name="cardBackgroundColor">#ffffff</color>
+    <color name="textColor">#808080</color>
+    <color name="tintColor">#000000</color>
+    <color name="buttonColor">#2196f5</color>
 </resources>

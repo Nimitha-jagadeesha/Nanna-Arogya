@@ -9,7 +9,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     tools:context=".HospitalUnit">
 
-        <ImageView
+    <ImageView
             android:id="@+id/hospital_imageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -35,6 +35,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:src="@drawable/date_picker"
+            android:onClick="onClickDatePicker"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hospital_imageView" />
 
@@ -59,6 +60,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:src="@drawable/time_picker"
+            android:onClick="onClickTimePicker"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date_picker_imageView" />
 
