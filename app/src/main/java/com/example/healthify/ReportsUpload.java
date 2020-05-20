@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -43,17 +45,16 @@ import java.util.List;
 
 public class ReportsUpload extends AppCompatActivity {
 
-    private ImageView imageView;
     private Button buttonUpload;
     ListView pdfListView;
-    private static final int PICK_IMAGE_REQUEST=234;
-    private Uri filePath;
+    ProgressBar progressBar;
     private StorageReference storageReference;
     EditText editTextPdfName;
     String id;
     FirebaseUser user;
     List<uploadPDF> uploadPDFList;
     DatabaseReference databaseReference;
+    BroadCast connectivity=new BroadCast();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,25 +134,20 @@ public class ReportsUpload extends AppCompatActivity {
        databaseReference.addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               progressBar.setVisibility(View.VISIBLE);
                uploadPDFList.clear();
                for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
                {
                    uploadPDF uploadPdf =postSnapshot.getValue(uploadPDF.class);
                    uploadPDFList.add(uploadPdf);
                }
-
-               String [] uploads =new String[uploadPDFList.size()];
-               for(int i=0;i<uploads.length;i++)
-               {
-                   uploads[i]=uploadPDFList.get(i).getPdfName();
-               }
-               ArrayAdapter<String>adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,uploads);
-               pdfListView.setAdapter(adapter);
-
+               ReportsList reportslist= new ReportsList(ReportsUpload.this,uploadPDFList);
+               pdfListView.setAdapter(reportslist);
+                progressBar.setVisibility(View.GONE);
            }
            @Override
            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+               progressBar.setVisibility(View.GONE);
            }
        });
     }
@@ -166,6 +162,7 @@ public class ReportsUpload extends AppCompatActivity {
         databaseReference=FirebaseDatabase.getInstance().getReference().child("reports").child(id);
         buttonUpload=findViewById(R.id.buttonUpload);
         uploadPDFList=new ArrayList<>();
+        progressBar=findViewById(R.id.progress_bar);
     }
 
     private void selectPDF()
@@ -221,5 +218,17 @@ public class ReportsUpload extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter=new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(connectivity,filter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(connectivity);
+    }
 
 }

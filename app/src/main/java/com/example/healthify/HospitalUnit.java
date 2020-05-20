@@ -10,6 +10,8 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ import java.util.List;
 
 public class HospitalUnit extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
+    ProgressBar progressBar;
     EditText dateEditText;
     EditText timeEditText;
     EditText hospitalEditText;
@@ -46,6 +50,7 @@ public class HospitalUnit extends AppCompatActivity implements DatePickerDialog.
     String id;
     ListView listViewHospital;
     List<HospitalData> hospitalList;
+    BroadCast connectivity=new BroadCast();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +112,7 @@ public class HospitalUnit extends AppCompatActivity implements DatePickerDialog.
         timeEditText=findViewById(R.id.time_EditText);
         hospitalEditText =findViewById(R.id.hospital_name_editText);
         dateEditText.setText(getCurrentDateAndTime());
-
+        progressBar=findViewById(R.id.progress_bar);
 
 
     }
@@ -189,9 +194,12 @@ public class HospitalUnit extends AppCompatActivity implements DatePickerDialog.
     @Override
     protected void onStart() {
         super.onStart();
+        IntentFilter filter=new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(connectivity,filter);
         databaseHospital.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.VISIBLE);
                 hospitalList.clear();
                 for(DataSnapshot hospitalSnapShot: dataSnapshot.getChildren())
                 {
@@ -200,12 +208,20 @@ public class HospitalUnit extends AppCompatActivity implements DatePickerDialog.
                 }
                 HospitalList hospitalList1= new HospitalList(HospitalUnit.this,hospitalList);
                 listViewHospital.setAdapter(hospitalList1);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(connectivity);
     }
 }

@@ -94,6 +94,15 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/time_EditText" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/set_button" />
+
     <ListView
         android:id="@+id/list_view_hospital"
         android:layout_width="match_parent"
@@ -102,7 +111,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/set_button"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar"
         app:layout_constraintVertical_bias="0.125" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

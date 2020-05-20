@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -16,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Medicines extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
-
+    ProgressBar progressBar;
     EditText editTextMedicine;
     EditText editTextTime;
     AlarmManager alarmManager=null;
@@ -38,8 +41,8 @@ public class Medicines extends AppCompatActivity implements TimePickerDialog.OnT
     FirebaseUser user;
     ArrayList<MedicineNotification> medicineList;
     ListView  listViewMedicine;
-    String id;
     Calendar startTime;
+    BroadCast connectivity=new BroadCast();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +102,7 @@ public class Medicines extends AppCompatActivity implements TimePickerDialog.OnT
         startTime = Calendar.getInstance();
         editTextTime=findViewById(R.id.editText_time_medicine);
         editTextTime.setText(startTime.get(Calendar.HOUR)+":"+startTime.get(Calendar.MINUTE));
+        progressBar=findViewById(R.id.progress_bar);
     }
 
     public  void onClickSet(View view)
@@ -133,9 +137,12 @@ public class Medicines extends AppCompatActivity implements TimePickerDialog.OnT
     @Override
     protected void onStart() {
         super.onStart();
+        IntentFilter filter=new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(connectivity,filter);
         databaseReminders.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.VISIBLE);
                 medicineList.clear();
                 for(DataSnapshot trackSnapShot: dataSnapshot.getChildren())
                 {
@@ -144,11 +151,12 @@ public class Medicines extends AppCompatActivity implements TimePickerDialog.OnT
                 }
                 MedicineList notiList=new MedicineList(Medicines.this,medicineList);
                 listViewMedicine.setAdapter(notiList);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
 
@@ -165,4 +173,11 @@ public class Medicines extends AppCompatActivity implements TimePickerDialog.OnT
         startTime.set(Calendar.SECOND,0);
         editTextTime.setText(hourOfDay+":"+minute);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(connectivity);
+    }
+
 }

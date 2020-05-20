@@ -3,11 +3,15 @@ package com.example.healthify;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +29,7 @@ import static java.lang.Integer.parseInt;
 
 public class ProfileInfo extends AppCompatActivity {
 
+    ProgressBar progressBar;
     EditText editTextHeight;
     EditText editTextWeight;
     EditText editTextAge;
@@ -32,6 +37,7 @@ public class ProfileInfo extends AppCompatActivity {
     RadioButton femaleRadioButton;
     DatabaseReference databasePersonalDetails;
     FirebaseUser user;
+    BroadCast connectivity=new BroadCast();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,7 @@ public class ProfileInfo extends AppCompatActivity {
         user= FirebaseAuth.getInstance().getCurrentUser();
         String id =user.getUid();
         databasePersonalDetails= FirebaseDatabase.getInstance().getReference("personalInfo").child(id);
+        progressBar=findViewById(R.id.progress_bar);
     }
     public void onClickSubmit(View view)
     {
@@ -296,9 +303,12 @@ public class ProfileInfo extends AppCompatActivity {
     }
     protected void onStart() {
         super.onStart();
+        IntentFilter filter=new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(connectivity,filter);
         databasePersonalDetails.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.VISIBLE);
                 for(DataSnapshot trackSnapShot: dataSnapshot.getChildren())
                 {
                     PersonalInfoData profile=trackSnapShot.getValue(PersonalInfoData.class);
@@ -310,13 +320,20 @@ public class ProfileInfo extends AppCompatActivity {
                     else
                         femaleRadioButton.setChecked(true);
                 }
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressBar.setVisibility(View.GONE);
 
             }
         });
 
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(connectivity);
     }
 }

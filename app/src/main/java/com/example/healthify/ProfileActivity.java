@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -43,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity
     private static final int PIC_IMAGE = 1;
     EditText editTextFirstName;
     ImageView imageViewProfilePic;
+    ProgressBar progressBarDetails;
     ProgressBar progressBar;
     EditText editTextLastName;
     EditText editTextPhoneNumber;
@@ -55,6 +58,7 @@ public class ProfileActivity extends AppCompatActivity
     FirebaseAuth mAuth;
     Uri uriprofileImage;
     String imageUrl;
+    BroadCast connectivity=new BroadCast();
     static boolean checked=false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -117,6 +121,7 @@ public class ProfileActivity extends AppCompatActivity
         databaseReference= FirebaseDatabase.getInstance().getReference("profiles").child(id);
         imageViewProfilePic=findViewById(R.id.profile_imageView_picture);
         mAuth=FirebaseAuth.getInstance();
+        progressBarDetails=findViewById(R.id.progress_bar);
     }
 
 
@@ -166,9 +171,12 @@ public class ProfileActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
+        IntentFilter filter=new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(connectivity,filter);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBarDetails.setVisibility(View.VISIBLE);
                 for(DataSnapshot trackSnapShot: dataSnapshot.getChildren())
                 {
                     Profile profile=trackSnapShot.getValue(Profile.class);
@@ -176,10 +184,12 @@ public class ProfileActivity extends AppCompatActivity
                     editTextLastName.setText(profile.getLastname());
                     editTextPhoneNumber.setText(profile.getPhoneNumber());
                 }
+                progressBarDetails.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressBarDetails.setVisibility(View.GONE);
 
             }
         });
@@ -236,5 +246,10 @@ public class ProfileActivity extends AppCompatActivity
                 }
             });
         }
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(connectivity);
     }
 }
