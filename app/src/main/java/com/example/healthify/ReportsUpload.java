@@ -2,6 +2,7 @@ package com.example.healthify;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -80,15 +81,18 @@ public class ReportsUpload extends AppCompatActivity {
                 Intent intent  =new Intent();
                 intent.setDataAndType(Uri.parse(uploadPdf.getUrl()), "application/pdf");
                 startActivity(Intent.createChooser(intent, "Choose an Application:"));
+//                Toast.makeText(ReportsUpload.this, position+"", Toast.LENGTH_SHORT).show();
             }
         });
-       pdfListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-           @Override
-           public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-               deletePdf(position);
-               return true;
-           }
-       });
+        pdfListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                deletePdf(position);
+                return true;
+            }
+        });
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void deletePdf(int position)
@@ -131,25 +135,32 @@ public class ReportsUpload extends AppCompatActivity {
 
     private void viewAllFiles()
     {
-       databaseReference.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               progressBar.setVisibility(View.VISIBLE);
-               uploadPDFList.clear();
-               for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
-               {
-                   uploadPDF uploadPdf =postSnapshot.getValue(uploadPDF.class);
-                   uploadPDFList.add(uploadPdf);
-               }
-               ReportsList reportslist= new ReportsList(ReportsUpload.this,uploadPDFList);
-               pdfListView.setAdapter(reportslist);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.VISIBLE);
+                uploadPDFList.clear();
+                for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
+                {
+                    uploadPDF uploadPdf =postSnapshot.getValue(uploadPDF.class);
+                    uploadPDFList.add(uploadPdf);
+                }
+                String uploads[]=new String[uploadPDFList.size()];
+                for(int i=0;i<uploads.length;i++)
+                {
+                    uploads[i]=uploadPDFList.get(i).getPdfName();
+                }
+//                ReportsList reportslist= new ReportsList(ReportsUpload.this,uploadPDFList);
+//                pdfListView.setAdapter(reportslist);
+                ArrayAdapter<String>adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,uploads);
+                pdfListView.setAdapter(adapter);
                 progressBar.setVisibility(View.GONE);
-           }
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
-               progressBar.setVisibility(View.GONE);
-           }
-       });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void bindViews()

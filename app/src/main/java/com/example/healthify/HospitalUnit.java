@@ -1,6 +1,7 @@
 package com.example.healthify;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -68,6 +69,8 @@ public class HospitalUnit extends AppCompatActivity implements DatePickerDialog.
                 return true;
             }
         });
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void showDeleteDialog(final String hospitalId, String name)

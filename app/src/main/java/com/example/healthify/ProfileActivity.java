@@ -1,6 +1,7 @@
 package com.example.healthify;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -86,6 +87,8 @@ public class ProfileActivity extends AppCompatActivity
                     }
                 }
             });
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void saveSettings(boolean b)

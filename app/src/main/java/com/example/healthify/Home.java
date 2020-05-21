@@ -1,17 +1,12 @@
 package com.example.healthify;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import androidx.annotation.NonNull;
@@ -80,6 +75,9 @@ public class Home extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(new Intent(this,MainActivity.class));
+                break;
+            default:
+                startActivity(new Intent(this,EmergencyCall.class));
         }
         return super.onOptionsItemSelected(item);
     }

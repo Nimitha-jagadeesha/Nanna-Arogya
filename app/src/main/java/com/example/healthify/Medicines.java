@@ -1,8 +1,10 @@
 package com.example.healthify;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -56,6 +58,8 @@ public class Medicines extends AppCompatActivity implements TimePickerDialog.OnT
                 return true;
             }
         });
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void showDeleteDialog(final String notificationId,  String name)
