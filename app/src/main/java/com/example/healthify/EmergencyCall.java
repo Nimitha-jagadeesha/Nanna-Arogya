@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -53,6 +55,7 @@ public class EmergencyCall extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
         bindViews();
+        loadSettings();
         phoneNumberListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,6 +103,20 @@ public class EmergencyCall extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
+    }
+    private void loadSettings()
+    {
+        SharedPreferences sharedPreferences=getSharedPreferences("Data_heathery",MODE_PRIVATE);
+        ProfileActivity.checked=sharedPreferences.getBoolean("Setting",false);
+        if(ProfileActivity.checked)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     private void bindViews()

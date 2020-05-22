@@ -57,10 +57,10 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:hint="@string/email"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textColor="#3700B3"
                 android:inputType="textEmailAddress"
                 android:paddingBottom="15dp"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="#3700B3" />
 
             <EditText
                 android:id="@+id/SignUpEditTextPassword"
@@ -68,22 +68,20 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:hint="@string/password"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
-
+                android:textColor="#3700B3"
                 android:inputType="textPassword"
                 android:paddingBottom="15dp"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="#3700B3" />
             <EditText
                 android:id="@+id/SignUpEditTextConformPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:hint="@string/conform_password"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
-
+                android:textColor="#3700B3"
                 android:inputType="textPassword"
                 android:paddingBottom="15dp"
-                android:textColorHint="@color/colorAccent" />
+                android:textColorHint="#3700B3" />
 
             <Button
                 android:id="@+id/buttonLogin"
@@ -95,7 +93,7 @@
                 android:text="@string/sign_up"
                 android:textAllCaps="false"
                 android:onClick="onClickSignUpButton"
-                android:textColor="@color/colorAccent" />
+                android:textColor="#3700B3" />
 
             <TextView
                 android:id="@+id/textViewSignup"
@@ -106,7 +104,7 @@
                 android:textAlignment="center"
                 android:onClick="onClickLogin"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorAccent" />
+                android:textColor="#3700B3" />
 
 
         </LinearLayout>
