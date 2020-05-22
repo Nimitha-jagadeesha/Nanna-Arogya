@@ -22,16 +22,18 @@ public class MainActivity extends AppCompatActivity {
 
     EditText emailEditText;
     EditText passwordEditText;
-    FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    FirebaseAuth mAuth;
     ProgressBar progressBar;
     BroadCast connectivity=new BroadCast();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (mAuth.getCurrentUser() != null) {
+        mAuth=FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null&&mAuth.getCurrentUser().isEmailVerified()) {
             finish();
             startActivity(new Intent(getApplicationContext(), Home.class));
         }
+
         setContentView(R.layout.activity_main);
         bindViews();
 
@@ -89,11 +91,12 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-                    Intent intent=new Intent(MainActivity.this,Home.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    intent.addCategory(Intent.CATEGORY_HOME);
                     finish();
+                    if(mAuth.getCurrentUser().isEmailVerified())
+                        startActivity(new Intent(getApplicationContext(), Home.class));
+                    else {
+                        startActivity(new Intent(getApplicationContext(), VerificationActivity.class));
+                    }
                 }
                 else
                 {
