@@ -24,6 +24,10 @@
         android:icon="@drawable/about"
         android:title="Log Out" />
     <item
+        android:id="@+id/nav_Maps"
+        android:icon="@drawable/about"
+        android:title="Map" />
+    <item
         android:id="@+id/emergencyCall"
         android:icon="@drawable/call"
         android:title="Call"

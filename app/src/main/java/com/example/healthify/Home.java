@@ -1,7 +1,9 @@
 package com.example.healthify;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 public class Home extends AppCompatActivity {
 
@@ -80,6 +83,14 @@ public class Home extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(new Intent(this,MainActivity.class));
+                break;
+            case R.id.nav_Maps:
+                if(ContextCompat.checkSelfPermission(Home.this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED)
+                     startActivity(new Intent(this,MapsActivity.class));
+                else
+                {
+
+                }
                 break;
             default:
                 startActivity(new Intent(this,EmergencyCall.class));

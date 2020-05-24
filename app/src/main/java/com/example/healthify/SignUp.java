@@ -30,22 +30,12 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         bindViews();
-        if (mAuth.getCurrentUser() != null) {
+        if (mAuth.getCurrentUser() != null&&mAuth.getCurrentUser().isEmailVerified()) {
             finish();
-            if(mAuth.getCurrentUser().isEmailVerified())
                 startActivity(new Intent(getApplicationContext(), Home.class));
-            else {
-                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(SignUp.this, "Verified", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                startActivity(new Intent(getApplicationContext(), VerificationActivity.class));
 
             }
         }
-    }
 
     private void bindViews()
     {
