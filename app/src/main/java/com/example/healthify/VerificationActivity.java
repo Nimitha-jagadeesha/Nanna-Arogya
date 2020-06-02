@@ -38,7 +38,7 @@ public class VerificationActivity extends AppCompatActivity {
             if(user.isEmailVerified())
             {
                 finish();
-                startActivity(new Intent(this,Home.class));
+                startActivity(new Intent(this,AllActivities.class));
             }
             else
                 Toast.makeText(this, "Sorry! Your Email is not yet Verified", Toast.LENGTH_SHORT).show();

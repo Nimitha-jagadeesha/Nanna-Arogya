@@ -87,8 +87,8 @@ public class ProfileActivity extends AppCompatActivity
                     }
                 }
             });
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void saveSettings(boolean b)

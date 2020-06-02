@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback , LocationListener, {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback  {
 
     private GoogleMap mMap;
     private static final LatLng MENLYN_PRETORIA =new LatLng(-25.782420,28.275439);

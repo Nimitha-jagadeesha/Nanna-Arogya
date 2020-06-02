@@ -32,7 +32,7 @@ public class SignUp extends AppCompatActivity {
         bindViews();
         if (mAuth.getCurrentUser() != null&&mAuth.getCurrentUser().isEmailVerified()) {
             finish();
-                startActivity(new Intent(getApplicationContext(), Home.class));
+                startActivity(new Intent(getApplicationContext(),AllActivities.class));
 
             }
         }
@@ -97,7 +97,7 @@ public class SignUp extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(SignUp.this, "User Register Sucessfull", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(SignUp.this,VerificationActivity.class);
+                    Intent intent=new Intent(SignUp.this,AllActivities.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     intent.addCategory(Intent.CATEGORY_HOME);

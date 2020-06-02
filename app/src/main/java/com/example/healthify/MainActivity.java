@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null&&mAuth.getCurrentUser().isEmailVerified()) {
             finish();
-            startActivity(new Intent(getApplicationContext(), Home.class));
+            startActivity(new Intent(getApplicationContext(),AllActivities.class));
         }
 
         setContentView(R.layout.activity_main);
@@ -92,11 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 if(task.isSuccessful())
                 {
                     finish();
-                    if(mAuth.getCurrentUser().isEmailVerified())
-                        startActivity(new Intent(getApplicationContext(), Home.class));
-                    else {
-                        startActivity(new Intent(getApplicationContext(), VerificationActivity.class));
-                    }
+
+                        startActivity(new Intent(getApplicationContext(), AllActivities.class));
                 }
                 else
                 {
