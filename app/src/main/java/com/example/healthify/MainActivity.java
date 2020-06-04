@@ -2,6 +2,7 @@ package com.example.healthify;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,21 +10,17 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText emailEditText;
-    EditText passwordEditText;
     FirebaseAuth mAuth;
-    ProgressBar progressBar;
+    int AUTH_UI_REQUEST_CODE =10001;
     BroadCast connectivity=new BroadCast();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,73 +32,52 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-        bindViews();
 
     }
 
-    private void bindViews()
-    {
-        emailEditText = findViewById(R.id.editTextEmail);
-        passwordEditText=findViewById(R.id.editTextPassword);
-        progressBar=findViewById(R.id.progressbar);
-
-    }
 
     public void onClickSignUp(View v)
     {
-        Intent intent =new Intent(this,SignUp.class);
-        startActivity(intent);
-    }
-    public void onClickLoginButton(View v)
-    {
-        userLogin();
+       List<AuthUI.IdpConfig> provider= Arrays.asList(
+               new AuthUI.IdpConfig.EmailBuilder().build(),
+               new AuthUI.IdpConfig.GoogleBuilder().build(),
+               new AuthUI.IdpConfig.PhoneBuilder().build()
+       );
+       Intent intent = AuthUI.getInstance()
+               .createSignInIntentBuilder()
+               .setAvailableProviders(provider)
+               .setTosAndPrivacyPolicyUrls("https://example.com","https://example.com")
+               .setAlwaysShowSignInMethodScreen(true)
+               .setLogo(R.mipmap.login)
+               .build();
+       startActivityForResult(intent,AUTH_UI_REQUEST_CODE);
     }
 
-    private void userLogin()
-    {
-        String mail =emailEditText.getText().toString().trim();
-        String password=passwordEditText.getText().toString();
-        if(mail.isEmpty())
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==AUTH_UI_REQUEST_CODE)
         {
-            emailEditText.setError("Email is required");
-            emailEditText.requestFocus();
-            return;
-        }
-        if(password.isEmpty())
-        {
-            passwordEditText.setError("Password is required");
-            passwordEditText.requestFocus();
-            return;
-        }
-        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches())
-        {
-            emailEditText.setError("Enter the valid Email Id");
-            emailEditText.requestFocus();
-            return;
-        }
-        if(password.length()<6)
-        {
-            passwordEditText.setError("Minimum Length of password Should be 6");
-            passwordEditText.requestFocus();
-            return;
-        }
-        progressBar.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(mail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful())
+            if(resultCode==RESULT_OK)
+            {
+                FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+                if(user.getMetadata().getCreationTimestamp()==user.getMetadata().getLastSignInTimestamp())
                 {
-                    finish();
-
-                        startActivity(new Intent(getApplicationContext(), AllActivities.class));
+                    Toast.makeText(this, "Successfully Signed Up", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    Toast.makeText(MainActivity.this,"Login Unsucessful",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Welcome Back", Toast.LENGTH_SHORT).show();
+
                 }
-                progressBar.setVisibility(View.GONE);
+                    finish();
+                    startActivity(new Intent(this,AllActivities.class));
             }
-        });
+            else
+            {
+
+            }
+        }
     }
     @Override
     protected void onStart() {

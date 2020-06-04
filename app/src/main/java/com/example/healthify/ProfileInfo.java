@@ -66,7 +66,7 @@ public class ProfileInfo extends AppCompatActivity {
         try {
             float height = parseFloat(editTextHeight.getText().toString().trim());
             float weight = parseFloat(editTextWeight.getText().toString().trim());
-
+            height/=100;
             bodyMassIndex = ((float) weight) / (height*height);
             int resInt;
             if(bodyMassIndex<18.5)
@@ -136,6 +136,7 @@ public class ProfileInfo extends AppCompatActivity {
                 try {
                     float height = parseFloat(editTextHeight.getText().toString().trim());
                    float weight = parseFloat(editTextWeight.getText().toString().trim());
+                    height/=100;
                     int age = parseInt(editTextAge.getText().toString().trim());
                     double BMR = 66.47+(13.75*weight)+(12.7*height*39.37)-(6.755*age);
                     bmr.setText(Math.round(BMR)+"");
@@ -167,6 +168,7 @@ public class ProfileInfo extends AppCompatActivity {
                 try {
                     float height = parseFloat(editTextHeight.getText().toString().trim());
                     float weight = parseFloat(editTextWeight.getText().toString().trim());
+                    height/=100;
                     int age = parseInt(editTextAge.getText().toString().trim());
                     double BMR = 655.1+(weight*9.563)+(4.7*height*39.37)-(4.667*age);
                     bmr.setText(Math.round(BMR)+"");

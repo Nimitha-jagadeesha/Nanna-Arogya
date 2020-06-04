@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Healthify</string>
-    <string name="don_t_you_have_an_account_sign_up">Don\'t you have an account?Sign Up</string>
+    <string name="app_name">Nanna Arogya</string>
+    <string name="sign_in_or_register"> <u>Sign In/Register</u> </string>
     <string name="save">Save</string>
     <string name="enter_display_name">Enter Display Name</string>
     <string name="tap_on_camera_to_choose_profile_picture">Tap on the camera to choose a profile picture</string>
@@ -30,8 +30,8 @@
     <string name="congratulations_you_have_normal_body_weight">Congratulations you have normal body weight.</string>
     <string name="do_physical_and_mental_exercises_regularly_and_stay_healthy_n">Do physical and mental exercises regularly and stay healthy\n</string>
     <string name="reports_upload">Reports Upload</string>
-    <string name="height_meters">Height (meters):</string>
-    <string name="weight_kg">weight (kg):</string>
+    <string name="height_meters">Height (cm):</string>
+    <string name="weight_kg">Weight (kg):</string>
     <string name="blood_group">Blood Group:</string>
     <string name="blood_sugar_level">Blood Sugar level:</string>
     <string name="first_name">First Name</string>

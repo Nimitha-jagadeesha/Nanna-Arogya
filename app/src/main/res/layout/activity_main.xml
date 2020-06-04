@@ -47,51 +47,16 @@
             android:orientation="vertical"
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
-
-
-            <EditText
-                android:id="@+id/editTextEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="Email"
-                android:textColor="#3700B3"
-                android:inputType="textEmailAddress"
-                android:paddingBottom="15dp"
-                android:textColorHint="#3700B3" />
-
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="Password"
-                android:textColor="#3700B3"
-                android:inputType="textPassword"
-                android:paddingBottom="15dp"
-                android:textColorHint="#3700B3" />
-
-            <Button
-                android:id="@+id/buttonLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:background="@drawable/rounded_button_transpertent"
-                android:text="Login"
-                android:onClick="onClickLoginButton"
-                android:textAllCaps="false"
-                android:textColor="#3700B3" />
-
             <TextView
                 android:id="@+id/textViewSignup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:text="@string/don_t_you_have_an_account_sign_up"
+                android:text="@string/sign_in_or_register"
                 android:textAlignment="center"
                 android:onClick="onClickSignUp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:background="@drawable/rounded_button_transpertent"
                 android:textColor="#3700B3" />
 
 
