@@ -28,6 +28,7 @@ public class AllActivities extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_all_activities);
         mAuth=FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() == null) {

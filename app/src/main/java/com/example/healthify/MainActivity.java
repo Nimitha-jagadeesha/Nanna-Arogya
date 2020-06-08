@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         mAuth=FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null&&mAuth.getCurrentUser().isEmailVerified()) {
             finish();
@@ -70,8 +71,11 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Welcome Back", Toast.LENGTH_SHORT).show();
 
                 }
-                    finish();
-                    startActivity(new Intent(this,AllActivities.class));
+                Intent intent=new Intent(this,AllActivities.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                finishAffinity();
+                startActivity(intent);
+                finish();
             }
             else
             {

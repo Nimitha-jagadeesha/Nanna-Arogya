@@ -5,36 +5,34 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@mipmap/image_helthify"
     tools:context=".MainActivity">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:gravity="center"
         android:layout_weight="1">
 
-        <androidx.cardview.widget.CardView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            app:cardCornerRadius="100dp"
-            android:elevation="50dp"
-            android:backgroundTint="@color/material_on_surface_disabled"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
-                android:fontFamily="@font/tangerine_bold"
-                android:textSize="50sp"
-                android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:text="Healthify" />
-        </androidx.cardview.widget.CardView>
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="22dp"
+            android:src="@mipmap/app_logo"/>
 
     </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:text="@string/app_name"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/we_are_here_to_help_you"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -46,18 +44,19 @@
             android:layout_centerVertical="true"
             android:orientation="vertical"
             android:paddingLeft="15dp"
+            android:gravity="center"
             android:paddingRight="15dp">
             <TextView
                 android:id="@+id/textViewSignup"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:text="@string/sign_in_or_register"
                 android:textAlignment="center"
                 android:onClick="onClickSignUp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:background="@drawable/rounded_button_transpertent"
-                android:textColor="#3700B3" />
+                android:background="#3700B3"
+                android:textColor="#ffffff" />
 
 
         </LinearLayout>
