@@ -1,10 +1,6 @@
 package com.example.healthify;
-
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -49,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                .setAvailableProviders(provider)
                .setTosAndPrivacyPolicyUrls("https://example.com","https://example.com")
                .setAlwaysShowSignInMethodScreen(true)
-               .setLogo(R.mipmap.login)
+               .setLogo(R.mipmap.nan)
                .build();
        startActivityForResult(intent,AUTH_UI_REQUEST_CODE);
     }
